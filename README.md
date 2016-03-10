@@ -1,6 +1,6 @@
 # slack-incoming-webhooks
 
-[![Build Status](https://travis-ci.org/CastellaFactory/slack-incoming-webhooks.svg)](https://travis-ci.org/CastellaFactory/slack-incoming-webhooks)
+[![Build Status](https://travis-ci.org/CastellaFactory/slack-incoming-webhooks.svg?branch=master)](https://travis-ci.org/CastellaFactory/slack-incoming-webhooks)
 
 Simple [Crystal](http://crystal-lang.org/) client for Slack Incoming Webhooks
 
