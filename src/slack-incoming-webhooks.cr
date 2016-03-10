@@ -77,7 +77,7 @@ module Slack::Incoming::Webhooks
                    @fallback = nil,
                    @author_name = nil,
                    @author_link = nil,
-                   @autho_icon = nil,
+                   @author_icon = nil,
                    @title = nil,
                    @title_link = nil,
                    @text = nil,
