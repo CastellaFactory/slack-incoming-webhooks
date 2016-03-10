@@ -64,7 +64,7 @@ module Slack::Incoming::Webhooks
       fallback:    {type: String, nilable: true},
       author_name: {type: String, nilable: true, emit_null: true},
       author_link: {type: String, nilable: true, emit_null: true},
-      autho_icon:  {type: String, nilable: true, emit_null: true},
+      author_icon:  {type: String, nilable: true, emit_null: true},
       title:       {type: String, nilable: true, emit_null: true},
       title_link:  {type: String, nilable: true, emit_null: true},
       text:        {type: String, nilable: true},
