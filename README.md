@@ -9,7 +9,7 @@ Simple [Crystal](http://crystal-lang.org/) client for Slack Incoming Webhooks
 ``` ruby
 require "slack-incoming-webhooks"
 
-slack = Slack::Incoming::Webhooks::Hook.new(
+slack = Slack::Incoming::Webhooks::Connection.new(
   "Your WEBHOOK_URL",
   username: "TEST")
 slack.post("text")
@@ -20,7 +20,7 @@ You can create more richly-formatted messages using [Attachments](https://api.sl
 ``` ruby
 require "slack-incoming-webhooks"
 
-slack = Slack::Incoming::Webhooks::Hook.new(
+slack = Slack::Incoming::Webhooks::Connection.new(
   "Your WEBHOOK_URL",
   username: "TEST")
 

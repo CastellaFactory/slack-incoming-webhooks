@@ -17,20 +17,20 @@ describe Slack::Incoming::Webhooks do
       payload.username.should eq("some_username")
     end
   end
-  describe Slack::Incoming::Webhooks::Hook do
+  describe Slack::Incoming::Webhooks::Connection do
     it "post" do
-      hook = Slack::Incoming::Webhooks::Hook.new(ENV["WEBHOOK_URL"])
+      hook = Slack::Incoming::Webhooks::Connection.new(ENV["WEBHOOK_URL"])
       resp = hook.post("text")
       (resp.body).should eq("ok")
     end
     it "attachment(no fields)" do
-      hook = Slack::Incoming::Webhooks::Hook.new(ENV["WEBHOOK_URL"])
+      hook = Slack::Incoming::Webhooks::Connection.new(ENV["WEBHOOK_URL"])
       attachments = [Slack::Incoming::Webhooks::Attachment.new(title: "test", text: "TEST")]
       resp = hook.post("text", attachments: attachments)
       (resp.body).should eq("ok")
     end
     it "attachment(fields)" do
-      hook = Slack::Incoming::Webhooks::Hook.new(ENV["WEBHOOK_URL"])
+      hook = Slack::Incoming::Webhooks::Connection.new(ENV["WEBHOOK_URL"])
       attachments = [Slack::Incoming::Webhooks::Attachment.new(title: "test", text: "TEST")]
       field1 = Slack::Incoming::Webhooks::AttachmentField.new("title", "value", false)
       field2 = Slack::Incoming::Webhooks::AttachmentField.new("TITLE", "VALUE", true)

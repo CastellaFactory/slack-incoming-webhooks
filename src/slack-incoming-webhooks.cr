@@ -5,7 +5,7 @@ require "uri"
 require "http/client"
 
 module Slack::Incoming::Webhooks
-  class Hook
+  class Connection
     def initialize(@url : String,
                    channel = nil,
                    icon_emoji = nil,
