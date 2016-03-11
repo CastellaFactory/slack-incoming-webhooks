@@ -9,25 +9,37 @@ Simple [Crystal](http://crystal-lang.org/) client for Slack Incoming Webhooks
 ``` ruby
 require "slack-incoming-webhooks"
 
-slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL", username: "TEST"
+slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL"
 slack.post "text"
 ```
+
+You can specify the channel or username or etc...
+
+Please refer to [here](https://api.slack.com/methods/chat.postMessage).
+
+``` ruby
+Slack::Incoming::Webhooks.new "Your WEBHOOK_URL", channel: "#hoge",
+                                                  username: "Bot"
+```
+
+### Attachments
 
 You can create more richly-formatted messages using [Attachments](https://api.slack.com/docs/attachments).
 
 ``` ruby
 require "slack-incoming-webhooks"
 
-slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL", username: "TEST"
+slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL"
 
-attachments = [Slack::Incoming::Attachment.new(
+attachment = Slack::Incoming::Attachment.new(
   author_name: "hoge",
   author_icon: "http://...cool_icon",
+  color: "36a64f",
   title: "TITLE",
   title_link: "https://www.google.com"
-  )]
+  )
 
-slack.post "text", attachments: attachments
+slack.post "text with attachments", attachments: [attachment]
 ```
 
 ## Development
