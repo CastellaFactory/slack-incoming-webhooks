@@ -17,10 +17,6 @@ module Slack::Incoming::Webhooks
     def post(text : String, attachments : Array(Attachment) = nil)
       @payload.post(@url, text, attachments)
     end
-
-    def from_json(json_str : String)
-      @payload = from_json(json_str)
-    end
   end
 
   class Payload
