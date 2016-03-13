@@ -40,7 +40,7 @@ module Slack
       def post(text : String, attachments : Array(Attachment) = nil)
         @text = text
         @attachments = attachments unless attachments.nil?
-        HTTP::Client.post_form url, "payload=#{URI.escape to_json}"
+        HTTP::Client.post_form @url, "payload=#{URI.escape to_json}"
       end
     end
 
