@@ -1,25 +1,5 @@
 require "./spec_helper"
 
-describe Slack::Incoming::Payload do
-  it "initializes from json" do
-    payload = Slack::Incoming::Payload.from_json(%({
-      "text": "some_text",
-      "channel": "some_channel",
-      "icon_emoji": "some_emoji",
-      "icon_url": "some_url",
-      "username": "some_username",
-      "attachments": [{"text": "text","fallback": "fallback"}]
-      }))
-    payload.text.should eq("some_text")
-    payload.channel.should eq("some_channel")
-    payload.icon_emoji.should eq("some_emoji")
-    payload.icon_url.should eq("some_url")
-    payload.username.should eq("some_username")
-    (payload.attachments as Array(Slack::Incoming::Attachment))[0].text.should eq("text")
-    (payload.attachments as Array(Slack::Incoming::Attachment))[0].fallback.should eq("fallback")
-  end
-end
-
 describe Slack::Incoming::Webhooks do
   it "has a version number" do
     Slack::Incoming::Webhooks::VERSION.should_not be_nil
@@ -27,45 +7,59 @@ describe Slack::Incoming::Webhooks do
 
   slack = Slack::Incoming::Webhooks.new("TEST_WEBHOOK_URL")
 
-  it "set_channel" do
-    slack.set_channel "#changed channel"
-    slack.payload.channel.should eq("#changed channel")
+  it "initializes from json" do
+    slack = Slack::Incoming::Webhooks.from_json(%({
+      "text": "some_text",
+      "channel": "some_channel",
+      "icon_emoji": "some_emoji",
+      "icon_url": "some_url",
+      "username": "some_username",
+      "attachments": [{"text": "text","fallback": "fallback"}]
+      }))
+    slack.text.should eq("some_text")
+    slack.channel.should eq("some_channel")
+    slack.icon_emoji.should eq("some_emoji")
+    slack.icon_url.should eq("some_url")
+    slack.username.should eq("some_username")
+    (slack.attachments as Array(Slack::Incoming::Attachment))[0].text.should eq("text")
+    (slack.attachments as Array(Slack::Incoming::Attachment))[0].fallback.should eq("fallback")
   end
 
-  it "set_icon_emoji" do
-    slack.set_icon_emoji "foo"
-    slack.payload.icon_emoji.should eq("foo")
+  it "set channel" do
+    slack.channel = "#changed channel"
+    slack.channel.should eq("#changed channel")
   end
-
-  it "set_icon_url" do
-    slack.set_icon_url "https://www.google.com"
-    slack.payload.icon_url.should eq("https://www.google.com")
+  it "set icon_emoji" do
+    slack.icon_emoji = "foo"
+    slack.icon_emoji.should eq("foo")
   end
-
-  it "set_username" do
-    slack.set_username "changed username"
-    slack.payload.username.should eq("changed username")
+  it "set icon_url" do
+    slack.icon_url = "https://www.google.com"
+    slack.icon_url.should eq("https://www.google.com")
   end
-
-  it "set_attachments" do
+  it "set username" do
+    slack.username = "changed username"
+    slack.username.should eq("changed username")
+  end
+  it "set attachments" do
     attachments = [Slack::Incoming::Attachment.new(title: "title", text: "text")]
-    slack.set_attachments attachments
-    (slack.payload.attachments as Array(Slack::Incoming::Attachment))[0].title.should eq("title")
-    (slack.payload.attachments as Array(Slack::Incoming::Attachment))[0].text.should eq("text")
+    slack.attachments = attachments
+    (slack.attachments as Array(Slack::Incoming::Attachment))[0].title.should eq("title")
+    (slack.attachments as Array(Slack::Incoming::Attachment))[0].text.should eq("text")
   end
 end
 
 describe Slack::Incoming::Attachment do
-  it "attachments" do
-    attachments = [Slack::Incoming::Attachment.new(
+  it "attachment" do
+    attachment = Slack::Incoming::Attachment.new(
       color: "red",
       fallback: "fallback",
       title: "title",
-      text: "text")]
-    attachments.[0].color.should eq("red")
-    attachments.[0].fallback.should eq("fallback")
-    attachments.[0].title.should eq("title")
-    attachments.[0].text.should eq("text")
+      text: "text")
+    attachment.color.should eq("red")
+    attachment.fallback.should eq("fallback")
+    attachment.title.should eq("title")
+    attachment.text.should eq("text")
   end
 
   it "add_field" do
