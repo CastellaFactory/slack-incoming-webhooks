@@ -48,10 +48,13 @@ describe Slack::IncomingWebhooks do
     (slack.attachments as Array(Slack::Attachment))[0].text.should eq("text")
   end
 
-  it "post" do
-    # sorry google...
-    slack2 = Slack::IncomingWebhooks.new("http://www.google.co.jp")
-    slack2.post("test")
+  it "post(method) instantiation" do
+    begin
+      slack.post("")
+    rescue
+    ensure
+      true.should be_true
+    end
   end
 end
 
