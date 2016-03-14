@@ -41,7 +41,7 @@ module Slack
       @attachments = attachments unless attachments.nil?
       # @url must be String, but this @url is String?
       # due to url is not in json mapping?
-      # @url = "" in initialize does to work...
+      # @url = "" in initialize does not work...
       HTTP::Client.post_form @url as String, "payload=#{URI.escape to_json}"
     end
   end
