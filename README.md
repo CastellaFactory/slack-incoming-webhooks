@@ -34,7 +34,7 @@ slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL"
 
 attachment = Slack::Incoming::Attachment.new author_name: "hoge",
                                              author_icon: "http://...cool_icon",
-                                             color: "36a64f",
+                                             color: "#36a64f",
                                              title: "TITLE",
                                              title_link: "https://www.google.com"
 
