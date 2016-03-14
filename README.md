@@ -19,8 +19,8 @@ Please refer to [here](https://api.slack.com/methods/chat.postMessage).
 
 ``` crystal
 Slack::IncomingWebhooks.new "Your WEBHOOK_URL", channel: "#hoge",
-                                                  username: "Bot",
-                                                  icon_emoji: ":ghost:"
+                                                username: "Bot",
+                                                icon_emoji: ":ghost:"
 ```
 
 ### Attachments
@@ -33,10 +33,10 @@ require "slack-incoming-webhooks"
 slack = Slack::IncomingWebhooks.new "Your WEBHOOK_URL"
 
 attachment = Slack::Attachment.new author_name: "hoge",
-                                             author_icon: "http://...cool_icon",
-                                             color: "#36a64f",
-                                             title: "TITLE",
-                                             title_link: "https://www.google.com"
+                                   author_icon: "http://...cool_icon",
+                                   color: "#36a64f",
+                                   title: "TITLE",
+                                   title_link: "https://www.google.com"
 
 slack.post "text with attachments", attachments: [attachment]
 ```
