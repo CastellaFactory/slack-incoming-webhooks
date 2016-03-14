@@ -1,14 +1,14 @@
 require "./spec_helper"
 
-describe Slack::Incoming::Webhooks do
+describe Slack::IncomingWebhooks do
   it "has a version number" do
-    Slack::Incoming::Webhooks::VERSION.should_not be_nil
+    Slack::IncomingWebhooks::VERSION.should_not be_nil
   end
 
-  slack = Slack::Incoming::Webhooks.new("TEST_WEBHOOK_URL")
+  slack = Slack::IncomingWebhooks.new("TEST_WEBHOOK_URL")
 
   it "initializes from json" do
-    slack = Slack::Incoming::Webhooks.from_json(%({
+    slack = Slack::IncomingWebhooks.from_json(%({
       "text": "some_text",
       "channel": "some_channel",
       "icon_emoji": "some_emoji",
@@ -21,8 +21,8 @@ describe Slack::Incoming::Webhooks do
     slack.icon_emoji.should eq("some_emoji")
     slack.icon_url.should eq("some_url")
     slack.username.should eq("some_username")
-    (slack.attachments as Array(Slack::Incoming::Attachment))[0].text.should eq("text")
-    (slack.attachments as Array(Slack::Incoming::Attachment))[0].fallback.should eq("fallback")
+    (slack.attachments as Array(Slack::Attachment))[0].text.should eq("text")
+    (slack.attachments as Array(Slack::Attachment))[0].fallback.should eq("fallback")
   end
 
   it "set channel" do
@@ -42,16 +42,16 @@ describe Slack::Incoming::Webhooks do
     slack.username.should eq("changed username")
   end
   it "set attachments" do
-    attachments = [Slack::Incoming::Attachment.new(title: "title", text: "text")]
+    attachments = [Slack::Attachment.new(title: "title", text: "text")]
     slack.attachments = attachments
-    (slack.attachments as Array(Slack::Incoming::Attachment))[0].title.should eq("title")
-    (slack.attachments as Array(Slack::Incoming::Attachment))[0].text.should eq("text")
+    (slack.attachments as Array(Slack::Attachment))[0].title.should eq("title")
+    (slack.attachments as Array(Slack::Attachment))[0].text.should eq("text")
   end
 end
 
-describe Slack::Incoming::Attachment do
+describe Slack::Attachment do
   it "attachment" do
-    attachment = Slack::Incoming::Attachment.new(
+    attachment = Slack::Attachment.new(
       color: "red",
       fallback: "fallback",
       title: "title",
@@ -63,10 +63,10 @@ describe Slack::Incoming::Attachment do
   end
 
   it "add_field" do
-    attachment = Slack::Incoming::Attachment.new
-    field = Slack::Incoming::AttachmentField.new("title", "value", false)
+    attachment = Slack::Attachment.new
+    field = Slack::AttachmentField.new("title", "value", false)
     attachment.add_field(field)
-    field_array = attachment.fields as Array(Slack::Incoming::AttachmentField)
+    field_array = attachment.fields as Array(Slack::AttachmentField)
     field_array.size.should eq(1)
     field_array[0].title.should eq("title")
     field_array[0].value.should eq("value")
@@ -74,11 +74,11 @@ describe Slack::Incoming::Attachment do
   end
 
   it "add_fields*" do
-    attachment = Slack::Incoming::Attachment.new
-    field1 = Slack::Incoming::AttachmentField.new("title1", "value1", false)
-    field2 = Slack::Incoming::AttachmentField.new("title2", "value2", true)
+    attachment = Slack::Attachment.new
+    field1 = Slack::AttachmentField.new("title1", "value1", false)
+    field2 = Slack::AttachmentField.new("title2", "value2", true)
     attachment.add_fields(field1, field2)
-    field_array = attachment.fields as Array(Slack::Incoming::AttachmentField)
+    field_array = attachment.fields as Array(Slack::AttachmentField)
     field_array.size.should eq(2)
     field_array[0].title.should eq("title1")
     field_array[0].value.should eq("value1")
@@ -88,14 +88,14 @@ describe Slack::Incoming::Attachment do
     field_array[1].short.should be_true
   end
   it "add_fields(Array ver)" do
-    attachment = Slack::Incoming::Attachment.new
+    attachment = Slack::Attachment.new
     fields = [
-      Slack::Incoming::AttachmentField.new("title1", "value1", false),
-      Slack::Incoming::AttachmentField.new("title2", "value2", true),
-      Slack::Incoming::AttachmentField.new("title3", "value3", false),
+      Slack::AttachmentField.new("title1", "value1", false),
+      Slack::AttachmentField.new("title2", "value2", true),
+      Slack::AttachmentField.new("title3", "value3", false),
     ]
     attachment.add_fields(fields)
-    field_array = attachment.fields as Array(Slack::Incoming::AttachmentField)
+    field_array = attachment.fields as Array(Slack::AttachmentField)
     field_array.size.should eq(3)
     field_array[0].title.should eq("title1")
     field_array[0].value.should eq("value1")

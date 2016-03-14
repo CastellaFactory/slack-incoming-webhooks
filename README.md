@@ -9,7 +9,7 @@ Simple [Crystal](http://crystal-lang.org/) library for Slack Incoming Webhooks
 ``` crystal
 require "slack-incoming-webhooks"
 
-slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL"
+slack = Slack::IncomingWebhooks.new "Your WEBHOOK_URL"
 slack.post "text"
 ```
 
@@ -18,7 +18,7 @@ You can specify the channel or username or etc...
 Please refer to [here](https://api.slack.com/methods/chat.postMessage).
 
 ``` crystal
-Slack::Incoming::Webhooks.new "Your WEBHOOK_URL", channel: "#hoge",
+Slack::IncomingWebhooks.new "Your WEBHOOK_URL", channel: "#hoge",
                                                   username: "Bot",
                                                   icon_emoji: ":ghost:"
 ```
@@ -30,9 +30,9 @@ You can create more richly-formatted messages using [Attachments](https://api.sl
 ``` crystal
 require "slack-incoming-webhooks"
 
-slack = Slack::Incoming::Webhooks.new "Your WEBHOOK_URL"
+slack = Slack::IncomingWebhooks.new "Your WEBHOOK_URL"
 
-attachment = Slack::Incoming::Attachment.new author_name: "hoge",
+attachment = Slack::Attachment.new author_name: "hoge",
                                              author_icon: "http://...cool_icon",
                                              color: "#36a64f",
                                              title: "TITLE",
