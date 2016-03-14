@@ -9,7 +9,7 @@ module Slack
     class Webhooks
       JSON.mapping({
         text:         String,
-        as_user:      {type: String, nilable: true, emit_null: true},
+        as_user:      {type: Bool, nilable: true, emit_null: true},
         attachments:  {type: Array(Attachment), nilable: true, emit_null: true},
         channel:      {type: String, nilable: true, emit_null: true},
         icon_emoji:   {type: String, nilable: true, emit_null: true},
