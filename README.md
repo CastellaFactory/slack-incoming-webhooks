@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/CastellaFactory/slack-incoming-webhooks.svg?branch=master)](https://travis-ci.org/CastellaFactory/slack-incoming-webhooks)
 
-Simple [Crystal](http://crystal-lang.org/) library for Slack Incoming Webhooks
+Simple [Crystal](http://crystal-lang.org/) wrapper for Slack Incoming Webhooks
+
+[Japanese blog post](http://castellafactory.github.io/post/crystal-slack-post/)
 
 ## Simple Usage
 
@@ -13,14 +15,21 @@ slack = Slack::IncomingWebhooks.new "Your WEBHOOK_URL"
 slack.post "text"
 ```
 
-You can specify the channel or username or etc...
+You can specify the channel and/or username and/or etc...
 
 Please refer to [here](https://api.slack.com/methods/chat.postMessage).
 
 ``` crystal
-Slack::IncomingWebhooks.new "Your WEBHOOK_URL", channel: "#hoge",
-                                                username: "Bot",
-                                                icon_emoji: ":ghost:"
+slack = Slack::IncomingWebhooks.new "Your WEBHOOK_URL", channel: "#hoge",
+                                                        username: "Bot",
+                                                        icon_emoji: ":ghost:"
+```
+
+Once a notifier has been initialized, you can update the channnel and/or username and/or etc...
+
+``` crystal
+slack.channel = "#huga"
+slack.username = "MyBot"
 ```
 
 ### Attachments
